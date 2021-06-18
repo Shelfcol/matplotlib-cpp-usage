@@ -7,12 +7,12 @@ find_package(PythonLibs 2.7)
 #         include
 # )
 
-add_executable(gxf_bezier
+add_executable(main
         main.cpp
 )   
 
-target_include_directories(gxf_bezier  PRIVATE  ${PYTHON_INCLUDE_DIRS})
-target_link_libraries(gxf_bezier  PRIVATE ${PYTHON_LIBRARIES})
+target_include_directories(main  PRIVATE  ${PYTHON_INCLUDE_DIRS})
+target_link_libraries(main  PRIVATE ${PYTHON_LIBRARIES})
 
 add_executable(bg_test  bg_test.cpp
 )   

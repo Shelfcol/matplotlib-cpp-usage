@@ -58,26 +58,31 @@ void LineStringsVis( boost::geometry::model::multi_linestring<linestring>& mul_g
     }
 }
 
-int main()
+//多条线生成可行驶区域
+void GenDriveableArea(boost::geometry::model::multi_linestring<linestring> &ml,double line_width,boost::geometry::model::multi_polygon<polygon> &result)
 {
     // Declare the symmetric distance strategy
-    boost::geometry::strategy::buffer::distance_symmetric<double> distance_strategy(0.5);
+    boost::geometry::strategy::buffer::distance_symmetric<double> distance_strategy(line_width/2);
 
     // Declare other strategies
     boost::geometry::strategy::buffer::side_straight side_strategy;
     boost::geometry::strategy::buffer::join_round join_strategy;
-    boost::geometry::strategy::buffer::end_round end_strategy;
+    boost::geometry::strategy::buffer::end_flat end_strategy;
     boost::geometry::strategy::buffer::point_circle point_strategy;
 
-    // Declare/fill a multi linestring
-    boost::geometry::model::multi_linestring<linestring> ml;
-    boost::geometry::read_wkt("MULTILINESTRING((3 5,5 10,7 5),(7 7,11 10,15 7,19 10),(7.2 7.2,11.2 10.2,15.2 7.2,19.2 10.2))", ml);
-
-    // Create the buffered geometry with left/right the same distance
-    boost::geometry::model::multi_polygon<polygon> result;
     boost::geometry::buffer(ml, result,
                 distance_strategy, side_strategy,
                 join_strategy, end_strategy, point_strategy);
+}
+
+int main()
+{
+    boost::geometry::model::multi_linestring<linestring> ml;
+    boost::geometry::read_wkt("MULTILINESTRING((3 5,5 10,7 5),(7 7,11 10,15 7,19 10),(7.2 7.2,11.2 10.2,15.2 7.2,19.2 10.2))", ml);
+    boost::geometry::model::multi_polygon<polygon> result;
+
+    GenDriveableArea(ml,2.9,result);
+
     LineStringsVis( ml);
     PolyGonsVis(result);
     plt::grid(true);

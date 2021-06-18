@@ -1,5 +1,13 @@
 [boost documentation](https://www.boost.org/doc/libs/1_76_0/libs/geometry/doc/html/index.html)
 
+
+
+##### [azimuth](https://www.boost.org/doc/libs/1_76_0/libs/geometry/doc/html/geometry/reference/algorithms/azimuth/azimuth_2.html)
+
+Calculate azimuth of a segment defined by a pair of points.计算方位角
+
+
+
 ##### [convex_hull](https://www.boost.org/doc/libs/1_76_0/libs/geometry/doc/html/geometry/reference/algorithms/convex_hull/convex_hull_2.html)：用一个最小凸多边形将原形状包住
 
 ```cpp
@@ -37,7 +45,7 @@ template<typename Geometry, typename Distance>
 void densify(Geometry const & geometry, Geometry & out, Distance const & max_distance)
 ```
 
-difference:geometry1比geometry2多出的区域，保存再vector或者deque里面
+difference: geometry1比geometry2多出的区域，保存再vector或者deque里面
 
 ```cpp
 template<typename Geometry1, typename Geometry2, typename Collection>
@@ -52,6 +60,8 @@ distance_result< typename point_type<Geometry1>::type, typename point_type<Geome
 ```
 
 ##### [discrete_hausdorff_distance](https://www.boost.org/doc/libs/1_76_0/libs/geometry/doc/html/geometry/reference/algorithms/discrete_hausdorff_distance/discrete_hausdorff_distance_2.html)：Hausdorff距离是描述两组点集之间相似程度的一种量度，它是两个点集之间距离的一种定义形式。[计算方法](https://blog.csdn.net/hupengfei_shenyang/article/details/94741834 )
+
+currently works for LineString-LineString, MultiPoint-MultiPoint, Point-MultiPoint, MultiLineString-MultiLineString
 
 就是将A中每个点分别计算到B中所有点的距离，取最短的。然后A中点得到的距离取最大的一个）
 
@@ -164,7 +174,7 @@ the following geometries are considered valid: multi-geometries with no elements
 
 ##### [length](https://www.boost.org/doc/libs/1_76_0/libs/geometry/doc/html/geometry/reference/algorithms/length/length_1.html):计算geometry的length，只有linear（eg. linestrip）才会返回相邻点的距离和，其他pointlike（eg. point）和areal(eg. polygon)都返回0
 
-##### [line_interpolate](https://www.boost.org/doc/libs/1_76_0/libs/geometry/doc/html/geometry/reference/algorithms/line_interpolate/line_interpolate_3.html):返回LinsString（或者任何含有LineString的数据结构）中一个多个点的插值结果
+##### [line_interpolate](https://www.boost.org/doc/libs/1_76_0/libs/geometry/doc/html/geometry/reference/algorithms/line_interpolate/line_interpolate_3.html):返回LineString（或者任何含有LineString的数据结构）中一个多个点的插值结果
 
 ```cpp
 template<typename Geometry, typename Distance, typename Pointlike>
